@@ -9,23 +9,37 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator
 } from 'react-native';
+
+import Nav from './app/components/Nav';
 
 class ReactNativeRouter extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to HELLO MILES!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <Navigator
+          initialRoute={{title: 'Awesome Scene', index: 0}}
+          renderScene={(route, navigator) =>
+            <Text style={styles.welcome}>Hello {route.title}!</Text>
+          }
+          navigationBar={
+            <Navigator.NavigationBar
+            routeMapper={{
+              LeftButton: (route, navigator, index, navState) =>
+              {return (<Text>Cancel</Text>);},
+              RightButton: (route, navigator, index, navState) =>
+              {return (<Text>Done</Text>);},
+              Title: (route, navigator, index, navState) =>
+              {return (<Text>Awesome Nav Bar</Text>);}
+            }}
+            style={{backgroundColor: 'gray'}}
+            />
+          }
+          style={{padding: 175, backgroundColor: 'red'}}
+        />
+        <Text>Hi page 1</Text>
       </View>
     );
   }
@@ -42,12 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
 AppRegistry.registerComponent('ReactNativeRouter', () => ReactNativeRouter);
