@@ -14,33 +14,33 @@ import {
 } from 'react-native';
 
 import Nav from './app/components/Nav';
+import Home from './app/components/Home';
 
 class ReactNativeRouter extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Navigator
-          initialRoute={{title: 'Awesome Scene', index: 0}}
-          renderScene={(route, navigator) =>
-            <Text style={styles.welcome}>Hello {route.title}!</Text>
-          }
-          navigationBar={
-            <Navigator.NavigationBar
-            routeMapper={{
-              LeftButton: (route, navigator, index, navState) =>
-              {return (<Text>Cancel</Text>);},
-              RightButton: (route, navigator, index, navState) =>
-              {return (<Text>Done</Text>);},
-              Title: (route, navigator, index, navState) =>
-              {return (<Text>Awesome Nav Bar</Text>);}
-            }}
-            style={{backgroundColor: 'gray'}}
+      <Navigator
+        initialRoute={{title: 'aaa Initial Scene', index: 0}}
+        renderScene={(route, navigator) => {
+          return (
+            <Home
+              title={route.title}
+              onForward={() => {
+                const nextIndex = route.index + 1;
+                navigator.push({
+                  title: 'Scene ' + nextIndex,
+                  index: nextIndex
+                });
+              }}
+              onBack={() => {
+                if (route.index > 0) {
+                  navigator.pop();
+                }
+              }}
             />
-          }
-          style={{padding: 175, backgroundColor: 'red'}}
-        />
-        <Text>Hi page 1</Text>
-      </View>
+          )
+        }}
+      />
     );
   }
 }
@@ -60,3 +60,27 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('ReactNativeRouter', () => ReactNativeRouter);
+
+      // <View style={styles.container}>
+      //   <Navigator
+      //     initialRoute={{title: 'Awesome Scene', index: 0}}
+      //     renderScene={(route, navigator) =>
+      //       <Text style={styles.welcome}>Hello {route.title}!</Text>
+      //     }
+      //     navigationBar={
+      //       <Navigator.NavigationBar
+      //       routeMapper={{
+      //         LeftButton: (route, navigator, index, navState) =>
+      //         {return (<Text>Cancel</Text>);},
+      //         RightButton: (route, navigator, index, navState) =>
+      //         {return (<Text>Done</Text>);},
+      //         Title: (route, navigator, index, navState) =>
+      //         {return (<Text>Awesome Nav Bar</Text>);}
+      //       }}
+      //       style={{backgroundColor: 'gray'}}
+      //       />
+      //     }
+      //     style={{padding: 175, backgroundColor: 'red'}}
+      //   />
+      //   <Text>Hi page 1</Text>
+      // </View>
