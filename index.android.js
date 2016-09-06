@@ -24,6 +24,8 @@ class ReactNativeRouter extends Component {
         renderScene={(route, navigator) => {
           return (
             <Home
+            route={route}
+            navigator={navigator}
               title={route.title}
               onForward={() => {
                 const nextIndex = route.index + 1;

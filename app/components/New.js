@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 
-export default class Home extends Component {
+export default class MyScene extends Component {
 
   render() {
     console.log('home props::', this.props)
